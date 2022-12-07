@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&family=Rubik+Distressed&family=Rubik+Microbe&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /> -->
+  </head>
+  <body>
+    <!-- <p id="titleLine">Room 413 (Patients' Room)</p> -->
+    <div class="header">
+      <span>Room 413 (Patients' Room)</span>
+      
+      <span class="material-symbols-outlined" id='lightt' onclick="myFunction()">
+        lightbulb
+        </span>
+      
+        <!-- 控制灯光 -->
+    </div>
+    <!-- <div class="light">?
+      <span class="material-symbols-outlined">
+        lightbulb
+        </span>
+        控制灯光
+    </div> -->
+   <div class="row">
+      <div class="column side">
+        <h2>Background</h2>
+        <p>This is a hospital with horrible monsters roaming around and you need to escape from it.</p>
+        <!-- how to use store here -->
+      </div>
+     <div class="column middle"> 
+      <div id="p5canvas">
+      </div>
+    </div>
+      <div class="column side">
+        <h2>Room 413</h2>
+        <h3>Hints</h3>
+        <p>This is the first room, your personal room, with no danger and some hints and rules for your future exploration.</p>
+        <p>Try to touch as many boxes as possible, there's one box with some hints inside.</p>
+      </div>
+   </div>
+
+    <div class="footer">
+      <p><b>Basic Instructions:</b></p>
+      <p>Use keys 'w','a','s','d' to control the movement of the character.</p>
+      <p>When you find the HINTS box, click the text to read the complete hints.</p>
+    </div>
+
+    <script src="sketch.js"></script>
+  </body>
+</html>

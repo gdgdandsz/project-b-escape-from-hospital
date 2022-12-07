@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  /* background-image:url('../firstroom.png'); */
+  height: 100%;
+  /* now the background image is above the color change in .css, so we need to use another way of background */
+  /* Another way is to not mention image or color but directly use background */
+  background:url('../firstroom.png'); 
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+canvas {
+  display: block;
+} 
+/* reference: https://www.runoob.com/css/css-website-layout.html */
+.header {
+  padding: 20px;
+  color: black;
+  text-shadow: 2px 2px white;
+  text-align: center;
+}
+.column {
+  float: left;
+  padding: 5px;
+}
+.column.side {
+  width: 10%;
+}
+.column.middle {
+  width: 80%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+}
+/* #lightt{
+  box-shadow: 10px 5px 5px white;
+} */

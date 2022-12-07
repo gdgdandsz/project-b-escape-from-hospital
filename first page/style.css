@@ -1,0 +1,47 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-image: url(cover.png);
+  /* reference: https://www.sohu.com/a/370879485_100264374 */
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
+  /* reference: https://blog.51cto.com/mouday/4907818 */
+}
+/* canvas {
+  display: block;
+} */
+
+h1{
+  top:70px;
+  text-align:center;
+  font-size:100px;
+  /* left: calc(50% - 100px);
+  top: calc(50% - 40px); */
+  color:red;
+  font-family: 'Rubik Distressed', cursive;
+}
+
+p{
+  text-align:center;
+  color:brown;
+  font-size: 40px;
+  /* top: 80px; */
+  font-family: 'Nerko One', cursive;
+}
+button{
+  width:140px;
+  height:90px;
+  text-align:center;
+  font-size:30px;
+  background-color: burlywood;
+  color:crimson;
+  font-family: 'Nerko One', cursive;
+}
+
+.buttons{
+  text-align:center;
+}
