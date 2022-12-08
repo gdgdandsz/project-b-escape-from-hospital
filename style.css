@@ -8,7 +8,7 @@ html, body {
   height: 100%;
   /* now the background image is above the color change in .css, so we need to use another way of background */
   /* Another way is to not mention image or color but directly use background */
-  background:url('../firstroom.png'); 
+  background:url('firstroom.png'); 
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
