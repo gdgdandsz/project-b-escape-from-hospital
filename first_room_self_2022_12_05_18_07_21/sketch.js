@@ -8,11 +8,19 @@ let character=[];
 let img;
 let imgback;
 let player;
-let t=0
+//let t=0
 //可以增加灯光效果，即1-2个随机长条浅色色块
 function myFunction(){
   //document.body.style.backgroundColor="red";
-  document.body.style.background="white";
+  // document.body.style.backgroundImage='';
+  // document.body.style.backgroundUrl='';
+  document.body.style.background='white';
+
+  // document.body.removeChild(img)
+
+  // document.getElementById("footer").style.background="white";
+  //   document.getElemenstByClassName("footer")[0].style.background="white";
+
   //console.log('123')
     
 }
@@ -53,6 +61,7 @@ function draw() {
   player.update();
   player.display();
   player.move();
+  
 }
 function mousePressed(){
   //console.log(player.x)
@@ -64,9 +73,8 @@ function mousePressed(){
   else if (mouseX>525 && mouseX<625 && mouseY>300 && mouseY<350){
     fill(252, 7, 3);
     textSize(20);
-    text('You can find some hints in room 413, go through the dark corridor',525,355)
-    text('and get to doctors room to find the key to the front gate.',525,375)
-    text(' Then you need to go back to the corridor and get out from the front door.',525,395)
+    text('To get to another room, move to the white door and click',525,355)
+    text('Do pay attention to the instructions around',525,375)
   }
 }
 // function mouseClicked(){
@@ -103,7 +111,7 @@ class Character{
   }
   checkDist(){
     if (dist(this.x,this.y,player.x,player.y)<70){
-      this.r1=182;
+      this.r1=185;
       this.b=122;
     }
   }
@@ -173,6 +181,15 @@ function hint(){
     textFont('Rubik Microbe');
     fill(184, 35, 6);
     text('HINT',525,300)
-    
+    if (mouseIsPressed){
+      refresh1();
+    }
+    //const myTimeout = setTimeout(refresh1,3000);
   }
+}
+function refresh1(){
+  fill(252, 7, 3);
+  textSize(20);
+  text('To get to another room, move to the white door and click',325,355)    
+  text('Do pay attention to the instructions around',325,375)
 }

@@ -45,3 +45,12 @@ button{
 .buttons{
   text-align:center;
 }
+
+.rules{
+  background: rgba(255,255,255,0.5)
+
+}
+
+.material-symbols-outlined{
+  text-shadow:2px,2px,white;
+}

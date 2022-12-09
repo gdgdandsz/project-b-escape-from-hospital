@@ -5,6 +5,7 @@ let img;
 let soundMonster;
 let corridorBack;
 let light;
+//let judge;
 function preload() {
   img = loadImage('imageMonster.png');
   corridorBack=loadImage('backgroundCorridor.png');
@@ -16,10 +17,12 @@ function setup() {
   monster=new Monster(random(100,1000),(50,550));
   player=new Player(50,50);
   light=new Light(random(100,1000),random(100,500));
+  //image(corridorBack,0,0)
+  //judge=false;
 }
 
 function draw() {
-  background(255);
+  background(255,0,0);
   image(corridorBack,0,0)
   monster.move();
   monster.display();
@@ -28,12 +31,36 @@ function draw() {
   square(0,340,50)//first room
   square(250,550,50)//doctors' room
   square(1050,275,50)//front gate
+  fill(0);
+  textSize(10);
+  textFont('Georgia')
+  text('Room 413',2,355)
+  text('Doctors Room',255,575)
+  text('Front Gate',1052,300)
   light.update();
   light.display();
   player.update();
   player.display();
   player.move();
   soundmonster();
+  //judge=false;
+  //console.log(judge)
+
+  if(mouseX>1040 && mouseX<1130 && mouseY>270 && mouseY<330 && player.x>1040 && player.x<1130 && player.y>270 && player.y<330 && mouseIsPressed){
+    //console.log("you win") 
+    //console.log(mouseX,mouseY)
+    // judge=true;
+    textSize(60);
+    // fill(237, 14, 2);
+    fill(145, 12, 4)
+    //textFont('Rubik Microbe');
+    // text('YOU WIN',550,300)
+    text('Sorry, you do not have the key',50,300)
+    //ellipse(600,300,100,100);
+
+    
+    //const myTimeout = setTimeout(refresh,4000);
+  }
 }
 
 function soundmonster(){
@@ -135,11 +162,15 @@ class Light{
     this.y=y;
   }
   update(){
-    if (mouseIsPressed==false || dist(this.x,this.y,player.x,player.y)>50){
-      fill(0);
-      rect(0,0,1100,600);
+    
+    // if (dist(player.x,player.y,1075,300)>50 || mouseIsPressed==false || dist(this.x,this.y,player.x,player.y)>50){
+      if (mouseIsPressed==false || (dist(this.x,this.y,player.x,player.y)>50 && dist(player.x,player.y,1075,300)>50)){
+
+        fill(0);
+        rect(0,0,1100,600);
     }
   }
+  
   display(){
     stroke(255);
     square(this.x,this.y,50)
@@ -155,14 +186,21 @@ function mousePressed(){
   else if (mouseX>250 && mouseX<300 && mouseY>550 && mouseY<600 && player.x>250 && player.x<300 && player.y>550 && player.y<600){
     window.location.replace('../doctors_room_2022_12_05_18_06_53/index.html');
   }
-  else if(mouseX>1050 && mouseX<1100 && mouseY>275 && mouseY<325 && player.x>1050 && player.x<1100 && player.y>275 && player.y<325){
-    textSize(80);
-    fill(237, 14, 2);
-    textFont('Rubik Microbe');
-    text('YOU WIN',550,300)
+  // else if(mouseX>1050 && mouseX<1100 && mouseY>275 && mouseY<325 && player.x>1050 && player.x<1100 && player.y>275 && player.y<325){
+  //   console.log("you win") 
+  //   console.log(mouseX,mouseY)
+  //   // judge=true;
+  //   // textSize(80);
+  //   // fill(237, 14, 2);
+  //   fill(255)
+  //   // textFont('Rubik Microbe');
+  //   // text('YOU WIN',550,300)
+  //   text('YOU WIN',600,300)
+  //   ellipse(600,300,100,100);
+
     
-    const myTimeout = setTimeout(refresh,4000);
-  }
+  //   // const myTimeout = setTimeout(refresh,4000);
+  // }
 }
 
 function myFunction(){

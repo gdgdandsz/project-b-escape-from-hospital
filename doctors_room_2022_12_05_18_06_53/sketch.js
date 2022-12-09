@@ -5,7 +5,7 @@ let img1;
 let monster=[];
 let imgKey;
 let keys;
-
+let checkKey;
 //let s;
 function preload() {
   img = loadImage('imageMonster.png');
@@ -24,14 +24,14 @@ function setup() {
       random(50,550)
     );
   }
-  
+  checkKey=false;
 }
 
 function draw() {
   image(img1,0,0)
   background(66, 3, 5, 100);
-  keys.update();
-  keys.display();
+  
+  
   for (let i = 0; i < monster.length; i++) {
     
     monster[i].display();
@@ -43,6 +43,8 @@ function draw() {
   stroke(0);
   rect(0,0,50,200);
   rect(0,0,40,190);
+  keys.display();
+  keys.update();
   player.update();
   player.display();
   player.move();
@@ -54,7 +56,11 @@ function myFunction(){
 
 function mousePressed(){
   if (mouseX>0 && mouseX<50 && mouseY<200 && mouseY>0 && player.x>0 && player.x<50 && player.y>0 && player.y<200){
-    window.location.replace('../project_b_corridor_2022_12_05_18_06_21/index.html');
+    if(checkKey==false){
+      window.location.replace('../project_b_corridor_2022_12_05_18_06_21/index.html');
+    }else if(checkKey==true){
+      window.location.replace('../project_b_corridor_get_out/index.html');
+    }
   }
 }
 class Player{
@@ -109,7 +115,7 @@ class Monster{
       textSize(60);
       fill(237, 14, 2);
       textFont('Rubik Microbe');
-      text('GAME OVER',550,300)
+      text('GAME OVER',500,300)
   
       
       const myTimeout = setTimeout(refresh,4000);
@@ -125,13 +131,19 @@ class Monster{
 }
 class Keys{
   constructor(){
-    
+   
   }
   update(){
+    if (player.x>900 && player.x<1100 && player.y<600 && player.y>500 && mouseX>990 && mouseX<1060 && mouseY>490 && mouseY<560 && mousePressed){
+      checkKey=true;
+      textSize(20);
+      fill('235, 19, 12')
+      text('Now you have the key',850,560)
+    }
     
   }
   display(){
-    imgKey.resize(55,55);
+    imgKey.resize(45,45);
     image(imgKey,1000,500);
   }
 }

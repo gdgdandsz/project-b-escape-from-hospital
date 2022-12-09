@@ -6,10 +6,10 @@ html, body {
   margin: 0;
   padding: 0;
   /* background-image:url('../firstroom.png'); */
-  height: 100%;
+  /* height: 100%; */
   /* now the background image is above the color change in .css, so we need to use another way of background */
   /* Another way is to not mention image or color but directly use background */
-  background:url('firstroom.png'); 
+  background-image:url('firstroom.png'); 
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
@@ -46,6 +46,7 @@ canvas {
   text-align: center;
   padding: 10px;
 }
-/* #lightt{
-  box-shadow: 10px 5px 5px white;
-} */
+#lightt{
+  font-size:50px;
+  box-shadow: 10px 6px 7px white;
+} 
