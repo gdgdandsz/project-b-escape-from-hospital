@@ -6,6 +6,9 @@ let monster=[];
 let imgKey;
 let keys;
 let checkKey;
+let keyAppear;
+let game;
+//let inner;//use inner and you will lose control when the player is out of canvas and you cannot move it back
 //let s;
 function preload() {
   img = loadImage('imageMonster.png');
@@ -20,11 +23,14 @@ function setup() {
   //s=second();
   for (let i = 0; i < 15; i++) {
     monster[i] = new Monster(
-      random(80, 1000),
-      random(50,550)
+      random(80, 950),
+      random(50,450)
     );
   }
   checkKey=false;
+  keyAppear=true;
+  game=true;
+  //inner=true
 }
 
 function draw() {
@@ -43,19 +49,36 @@ function draw() {
   stroke(0);
   rect(0,0,50,200);
   rect(0,0,40,190);
-  keys.display();
-  keys.update();
-  player.update();
-  player.display();
-  player.move();
+  if (keyAppear==true){
+    keys.display();
+    keys.update();
+  }else{
+    textSize(20);
+    fill('235, 19, 12')
+    text('Now you have the key',850,560)
+  }
+  //checkInner();
+  if (game==true){
+    player.update();
+    player.display();
+    player.move();
+    // if (inner==true){
+      
+    // }
+  }
+  //player disappear when game over
 }
 function myFunction(){
   document.body.style.background="white";
     
 }
-
+// function checkInner(){
+//   if (player.x<0 || player.x>1100 || player.y<0 || player.y>600){
+//     inner=false;
+//   }
+// }
 function mousePressed(){
-  if (mouseX>0 && mouseX<50 && mouseY<200 && mouseY>0 && player.x>0 && player.x<50 && player.y>0 && player.y<200){
+  if (player.x>0 && player.x<50 && player.y>0 && player.y<200){
     if(checkKey==false){
       window.location.replace('../project_b_corridor_2022_12_05_18_06_21/index.html');
     }else if(checkKey==true){
@@ -71,17 +94,21 @@ class Player{
     this.l2=30
   }
   update(){
-    //make it one move by one click
-    if (key=='d' && keyIsPressed==true){
-        player.x+=10;
-      }else if (key=='a' && keyIsPressed==true){
-        player.x-=10;
-      }else if (key=='w' && keyIsPressed==true){
-        player.y-=10;
-      }else if (key=='s' && keyIsPressed==true){
-        player.y+=10;
-      }
+    //need to add the function that the player cannot move out of the canvas here
+    if (key=='d' && keyIsPressed==true && this.x<1100){
+      this.x+=10;
+    }else if (key=='a' && keyIsPressed==true && this.x>0){        
+      this.x-=10;
+    }else if (key=='w' && keyIsPressed==true && this.y>0){
+      this.y-=10;
+    }else if (key=='s' && keyIsPressed==true && this.y<600){        
+      this.y+=10;
+    }
+    //stop moving after death
+   
   }
+    //make it one move by one click
+    
   move(){
     this.l1=30+3*sin(0.07*frameCount);
     this.l2=30-3*sin(0.07*frameCount);
@@ -108,6 +135,7 @@ class Monster{
   constructor(x,y){
     this.x=x;
     this.y=y;
+    this.change=0
   }
   update(){
     if (dist(this.x,this.y,player.x,player.y)<35){
@@ -116,17 +144,20 @@ class Monster{
       fill(237, 14, 2);
       textFont('Rubik Microbe');
       text('GAME OVER',500,300)
-  
+      game=false;
       
       const myTimeout = setTimeout(refresh,4000);
       //wait for 8 seconds and jump to the first page
     }
+    this.change=0.8*sin(0.1*frameCount)
   }
 
   display(){
     img.resize(60,60)
     image(img,this.x,this.y)
-    
+    fill(235, 164, 52)
+    textSize(15)
+    text('zzz',this.x+45+this.change,this.y-8-this.change)
   }
 }
 class Keys{
@@ -136,9 +167,8 @@ class Keys{
   update(){
     if (player.x>900 && player.x<1100 && player.y<600 && player.y>500 && mouseX>990 && mouseX<1060 && mouseY>490 && mouseY<560 && mousePressed){
       checkKey=true;
-      textSize(20);
-      fill('235, 19, 12')
-      text('Now you have the key',850,560)
+      
+      keyAppear=false;
     }
     
   }

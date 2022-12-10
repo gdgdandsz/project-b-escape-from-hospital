@@ -17,11 +17,11 @@
     <div class="header">
       <span>Room 413 (Patients' Room)</span>
       
-      <span class="material-symbols-outlined" id='lightt' style="font-size:50px" onclick="myFunction()">
+      <!-- <span class="material-symbols-outlined" id='lightt' style="font-size:50px" onclick="myFunction()">
         lightbulb
-        </span>
+        </span> -->
       
-        <!-- 控制灯光 -->
+        <!-- control the light -->
     </div>
     <!-- <div class="light">?
       <span class="material-symbols-outlined">
@@ -31,27 +31,33 @@
     </div> -->
    <div class="row">
       <div class="column side">
-        <h2>Background</h2>
+        <!-- <h2>Background</h2>
         <p>This is a hospital with horrible monsters roaming around and you need to escape from it.</p>
-        <!-- how to use store here -->
+        how to use store here -->
+        <!-- <div class="lightt" onclick="myFunction"><img src="../switch1.png" alt=""></div> -->
+        <img alt="" src="switch1.png" 
+        style="height: 60px; width: 28px; display:block;z-index:150" id="imgClick1" onclick="myFunction()"/>
+        <img alt="" src="switch2.png" 
+        style="height: 60px; width: 28px; display:none; z-index:150" id="imgClick2" onclick="myFunction()"/>
       </div>
+      <!-- reference: https://stackoverflow.com/questions/6764961/change-an-image-with-onclick -->
      <div class="column middle"> 
       <div id="p5canvas">
       </div>
     </div>
       <div class="column side">
-        <h2>Room 413</h2>
+        <!-- <h2>Room 413</h2>
         <h3>Hints</h3>
         <p>This is the first room, your personal room, with no danger and some hints and rules for your future exploration.</p>
-        <p>Try to touch as many boxes as possible, there's one box with some hints inside.</p>
+        <p>Try to touch as many boxes as possible, there's one box with some hints inside.</p> -->
       </div>
    </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
       <p><b>Basic Instructions:</b></p>
       <p>Use keys 'w','a','s','d' to control the movement of the character.</p>
       <p>When you find the HINTS box, click the text to read the complete hints.</p>
-    </div>
+    </div> -->
 
     <script src="sketch.js"></script>
   </body>

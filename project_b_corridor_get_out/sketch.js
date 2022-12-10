@@ -5,28 +5,53 @@ let img;
 let soundMonster;
 let corridorBack;
 let light;
+let cableconnect;
+let cabledisconnect;
+let lightImage;
+let game;
+let monster=[];
+let checkWin;
 //let judge;
 function preload() {
   img = loadImage('imageMonster.png');
   corridorBack=loadImage('backgroundCorridor.png');
   soundMonster=loadSound('soundMonster.mp4');
+  cableconnect=loadImage('../cable1.png');
+  cabledisconnect=loadImage('../cable0.png');
 }
 function setup() {
   let canvas=createCanvas(1100, 600);
   canvas.parent('p5canvas');
-  monster=new Monster(random(100,1000),(50,550));
+  //monster=new Monster(random(100,1000),(50,550));
+  for (let i = 0; i < 2; i++) {
+    monster[i] = new Monster(
+      random(80, 1000),
+      random(50,550)
+    );
+  }
   player=new Player(50,50);
   light=new Light(random(100,1000),random(100,500));
   //image(corridorBack,0,0)
   //judge=false;
+  cableconnect.resize(80,80)
+  cabledisconnect.resize(80,80)
+  lightImage=cabledisconnect;
+  game=true;
+  checkWin=false;
 }
 
 function draw() {
   background(255,0,0);
   image(corridorBack,0,0)
-  monster.move();
-  monster.display();
-  monster.bounce();
+  // monster.move();
+  // monster.display();
+  // monster.bounce();
+  for (let i = 0; i < monster.length; i++) {
+    
+    monster[i].move();
+    monster[i].display();
+    monster[i].bounce();
+  }
   fill(255)
   square(0,340,50)//first room
   square(250,550,50)//doctors' room
@@ -39,9 +64,12 @@ function draw() {
   text('Front Gate',1052,300)
   light.update();
   light.display();
-  player.update();
-  player.display();
-  player.move();
+  if (game==true){
+    player.update();
+    player.display();
+    player.move();
+  }
+  
   soundmonster();
   //judge=false;
   //console.log(judge)
@@ -50,16 +78,21 @@ function draw() {
     //console.log("you win") 
     //console.log(mouseX,mouseY)
     // judge=true;
-    textSize(80);
-    // fill(237, 14, 2);
-    fill(145, 12, 4)
-    //textFont('Rubik Microbe');
-    // text('YOU WIN',550,300)
-    text('Escape Successfully',150,300)
+    // textSize(80);
+    // // fill(237, 14, 2);
+    // fill(145, 12, 4)
+    // //textFont('Rubik Microbe');
+    // // text('YOU WIN',550,300)
+    // text('Escape Successfully',150,300)
     //ellipse(600,300,100,100);
-
-    
+    checkWin=true;
+    game=false;
     const myTimeout = setTimeout(refresh,4000);
+  }
+  if (checkWin==true){
+    textSize(80);
+    fill(145, 12, 4)
+    text('Escape Successfully',150,300)
   }
 }
 
@@ -120,20 +153,21 @@ class Player{
   }
   update(){
     //make it one move by one click
-    if (key=='d' && keyIsPressed==true){
-        player.x+=10;
-      }else if (key=='a' && keyIsPressed==true){
-        player.x-=10;
-      }else if (key=='w' && keyIsPressed==true){
-        player.y-=10;
-      }else if (key=='s' && keyIsPressed==true){
-        player.y+=10;
-      }
+    if (key=='d' && keyIsPressed==true && this.x<1100){
+      this.x+=10;
+    }else if (key=='a' && keyIsPressed==true && this.x>0){        
+      this.x-=10;
+    }else if (key=='w' && keyIsPressed==true && this.y>0){
+      this.y-=10;
+    }else if (key=='s' && keyIsPressed==true && this.y<600){        
+      this.y+=10;
+    }
     if (dist(this.x,this.y,monster.x,monster.y)<50){
       textSize(40)
       textFont('Rubik Microbe');
       text('GAME OVER',200,120)
       fill(186, 41, 63);
+      game=false;
       const myTimeout = setTimeout(refresh,8000);
     }
   }
@@ -164,26 +198,31 @@ class Light{
   update(){
     
     // if (dist(player.x,player.y,1075,300)>50 || mouseIsPressed==false || dist(this.x,this.y,player.x,player.y)>50){
-      if (mouseIsPressed==false || (dist(this.x,this.y,player.x,player.y)>50 && dist(player.x,player.y,1075,300)>50)){
-
-        fill(0);
-        rect(0,0,1100,600);
+    if (dist(this.x,this.y,player.x,player.y)>80 && dist(player.x,player.y,1075,300)>80){
+      lightImage=cabledisconnect
+      fill(0);
+      rect(0,0,1100,600);
+    }else{
+      lightImage=cableconnect
     }
   }
   
   display(){
-    stroke(255);
-    square(this.x,this.y,50)
+    
+    //stroke(255);
+    //square(this.x,this.y,50)
+    
+    image(lightImage,this.x,this.y);
   }
 }
 function mousePressed(){
   // square(0,340,50)//first room
   // square(250,550,50)//doctors' room
   // square(1050,275,50)//front gate
-  if (mouseX>0 && mouseX<50 && mouseY>340 && mouseY<390 && player.x>0 && player.x<50 && player.y>340 && player.y<39){
+  if (player.x>0 && player.x<50 && player.y>340 && player.y<39){
     window.location.replace('../first_room_self_2022_12_05_18_07_21/index.html');
   }
-  else if (mouseX>250 && mouseX<300 && mouseY>550 && mouseY<600 && player.x>250 && player.x<300 && player.y>550 && player.y<600){
+  else if (player.x>250 && player.x<300 && player.y>550 && player.y<600){
     window.location.replace('../doctors_room_2022_12_05_18_06_53/index.html');
   }
   // else if(mouseX>1050 && mouseX<1100 && mouseY>275 && mouseY<325 && player.x>1050 && player.x<1100 && player.y>275 && player.y<325){

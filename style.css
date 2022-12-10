@@ -15,8 +15,9 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-canvas {
+#p5canvas {
   display: block;
+  z-index:101
 } 
 /* reference: https://www.runoob.com/css/css-website-layout.html */
 .header {
@@ -31,6 +32,8 @@ canvas {
 }
 .column.side {
   width: 10%;
+  /* vertical-align:middle;
+  display:flex; */
 }
 .column.middle {
   width: 80%;
@@ -46,7 +49,8 @@ canvas {
   text-align: center;
   padding: 10px;
 }
-#lightt{
-  font-size:50px;
-  box-shadow: 10px 6px 7px white;
-} 
+/* #lightt{
+  vertical-align: middle;
+  display:flex;
+  /* font-size:50px;
+  box-shadow: 10px 6px 7px white; */
