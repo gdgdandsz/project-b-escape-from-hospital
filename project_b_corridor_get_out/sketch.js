@@ -12,6 +12,7 @@ let game;
 let monster;
 let checkWin;
 let lightsAreOn = false;
+let checkPlayer;
 //let judge;
 function preload() {
   img = loadImage('imageMonster.png');
@@ -54,6 +55,7 @@ function setup() {
   lightImage=cabledisconnect;
   game=true;
   checkWin=false;
+  checkPlayer=true;
 }
 
 function draw() {
@@ -80,6 +82,7 @@ function draw() {
   text('Front Gate',1052,300)
   light.update();
   light.display();
+  checkplayer();
   if (game==true){
     player.update();
     player.display();
@@ -112,6 +115,16 @@ function draw() {
   }
   if(lightsAreOn == false){
     bgd()
+  }
+}
+function checkplayer(){
+  if (checkPlayer==false){
+    textSize(60)
+    //textFont('Rubik Microbe');
+    fill(186, 41, 63);
+    text('GAME OVER',330,300)
+    game=false;
+    const myTimeout = setTimeout(refresh,5000);
   }
 }
 function bgd(){
@@ -185,12 +198,14 @@ class Player{
       this.y+=8;
     }
     if (dist(this.x,this.y,monster.x,monster.y)<50){
-      textSize(40)
-      textFont('Rubik Microbe');
-      text('GAME OVER',200,120)
-      fill(186, 41, 63);
-      game=false;
-      const myTimeout = setTimeout(refresh,8000);
+      checkPlayer=false
+      // textSize(40)
+      // textFont('Rubik Microbe');
+      
+      // fill(186, 41, 63);
+      // text('GAME OVER',200,120)
+      // game=false;
+      // const myTimeout = setTimeout(refresh,8000);
     }
   }
   move(){
