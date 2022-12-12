@@ -342,7 +342,7 @@ class Tool7{
     if (dist(this.x,this.y,player.x,player.y)<70){
       textSize(15)
       text('If you cannot see anything, try to listen to the sound.',this.x+25+this.c,this.y+15+this.c)
-      text('The loader the sound is, the closer the monsters are.',this.x+25+this.c,this.y+30+this.c)
+      text('The louder the sound is, the closer the monsters are.',this.x+25+this.c,this.y+30+this.c)
     }
   }
 }

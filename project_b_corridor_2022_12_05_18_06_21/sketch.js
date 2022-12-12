@@ -8,9 +8,10 @@ let light;
 let cableconnect;
 let cabledisconnect;
 let lightImage;
-let monster=[];
+let monster;
 let game;
 let lightsAreOn = false;
+let player;
 //let judge;
 function preload() {
   img = loadImage('imageMonster.png');
@@ -39,12 +40,12 @@ function setup() {
   let canvas=createCanvas(1100, 600);
   canvas.parent('p5canvas');
   //monster=new Monster(random(100,1000),(50,550));
-  for (let i = 0; i < 2; i++) {
-    monster[i] = new Monster(
+  
+  monster = new Monster(
       random(80, 1000),
       random(50,550)
     );
-  }
+  
   player=new Player(50,50);
   light=new Light(random(100,1000),random(100,500));
   //image(corridorBack,0,0)
@@ -61,12 +62,13 @@ function draw() {
   // monster.move();
   // monster.display();
   // monster.bounce();
-  for (let i = 0; i < monster.length; i++) {
+  
     
-    monster[i].move();
-    monster[i].display();
-    monster[i].bounce();
-  }
+  monster.move();
+  monster.display();    
+  monster.bounce();
+  monster.update();
+  
   fill(255)
   square(0,340,50)//first room
   square(250,550,50)//doctors' room
@@ -103,10 +105,19 @@ function draw() {
 
     
     //const myTimeout = setTimeout(refresh,4000);
+
   }
   if(lightsAreOn == false){
     bgd()
   }
+  // if (dist(player.x,player.y,monster.x,monster.y)<50){
+  //   textSize(40)
+  //   textFont('Rubik Microbe');
+  //   text('GAME OVER',200,120)
+  //   fill(186, 41, 63);
+  //   game=false;
+  //   const myTimeout = setTimeout(refresh,8000);
+  // }
 }
 function bgd(){
   fill(0);
@@ -127,12 +138,23 @@ class Monster{
   constructor(x,y){
     this.x=x;
     this.y=y;
-    this.xSpd = random(-1, 1); 
-    this.ySpd = random(-1, 1);
+    this.xSpd = random(-2, 2); 
+    this.ySpd = random(-2, 2);
   }
   move(){
     this.x += this.xSpd;
     this.y += this.ySpd;
+  }
+  update(){
+    if (dist(player.x,player.y,this.x,this.y)<50){
+        textSize(40)
+        textFont('Rubik Microbe');
+        text('GAME OVER',200,120)
+        fill(186, 41, 63);
+        game=false;
+        const myTimeout = setTimeout(refresh,8000);
+      }
+    console.log(dist(player.x,player.y,this.x,this.y))
   }
   bounce(){
     if (this.x < 0) {
@@ -178,14 +200,14 @@ class Player{
     }else if (key=='s' && keyIsPressed==true && this.y<560){        
       this.y+=8;
     }
-    if (dist(this.x,this.y,monster.x,monster.y)<50){
-      textSize(40)
-      textFont('Rubik Microbe');
-      text('GAME OVER',200,120)
-      fill(186, 41, 63);
-      game=false;
-      const myTimeout = setTimeout(refresh,8000);
-    }
+    // if (dist(this.x,this.y,monster.x,monster.y)<50){
+    //   textSize(40)
+    //   textFont('Rubik Microbe');
+    //   text('GAME OVER',200,120)
+    //   fill(186, 41, 63);
+    //   game=false;
+    //   const myTimeout = setTimeout(refresh,8000);
+    // }
   }
   move(){
     this.l1=30+3*sin(0.07*frameCount);

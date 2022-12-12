@@ -9,7 +9,7 @@ let cableconnect;
 let cabledisconnect;
 let lightImage;
 let game;
-let monster=[];
+let monster;
 let checkWin;
 let lightsAreOn = false;
 //let judge;
@@ -39,12 +39,12 @@ function setup() {
   let canvas=createCanvas(1100, 600);
   canvas.parent('p5canvas');
   //monster=new Monster(random(100,1000),(50,550));
-  for (let i = 0; i < 2; i++) {
-    monster[i] = new Monster(
+  
+  monster= new Monster(
       random(80, 1000),
       random(50,550)
     );
-  }
+  
   player=new Player(50,50);
   light=new Light(random(100,1000),random(100,500));
   //image(corridorBack,0,0)
@@ -62,12 +62,12 @@ function draw() {
   // monster.move();
   // monster.display();
   // monster.bounce();
-  for (let i = 0; i < monster.length; i++) {
+  
     
-    monster[i].move();
-    monster[i].display();
-    monster[i].bounce();
-  }
+  monster.move();
+  monster.display();    
+  monster.bounce();
+  
   fill(255)
   square(0,340,50)//first room
   square(250,550,50)//doctors' room
