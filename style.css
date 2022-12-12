@@ -5,26 +5,30 @@
 html, body {
   margin: 0;
   padding: 0;
+  /* reference: https://www.w3schools.com/jsref/prop_style_backgroundimage.asp */
   /* background-image:url('../firstroom.png'); */
   /* height: 100%; */
   /* now the background image is above the color change in .css, so we need to use another way of background */
   /* Another way is to not mention image or color but directly use background */
-  background-image:url('firstroom.png'); 
+  background:black
   /* Center and scale the image nicely */
-  background-position: center;
+  /* background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
 }
 #p5canvas {
   display: block;
   z-index:101
 } 
+h1{
+  margin:0px;
+  color:white;
+}
 /* reference: https://www.runoob.com/css/css-website-layout.html */
 .header {
   padding: 20px;
-  color: black;
-  text-shadow: 2px 2px white;
-  text-align: center;
+  /* color:white */
+  text-align:center;
 }
 .column {
   float: left;
@@ -54,3 +58,19 @@ html, body {
   display:flex;
   /* font-size:50px;
   box-shadow: 10px 6px 7px white; */
+
+
+
+
+
+
+
+  /* body{
+    /* border-style: dashed;
+    border-color: green;
+    border-width: 4px; */
+
+    /* border: solid green 2px; */
+    /* border: 1px solid green; */
+    
+  

@@ -8,8 +8,24 @@ let keys;
 let checkKey;
 let keyAppear;
 let game;
+let lightsAreOn = false;
 //let inner;//use inner and you will lose control when the player is out of canvas and you cannot move it back
 //let s;
+function myFunction(){
+  if (document.getElementById("imgClick2").style.display=='none'){
+    document.getElementById("imgClick1").style.display='none';
+    document.getElementById("imgClick2").style.display='block';
+    document.body.style.background="url('firstroom.png')"
+    document.body.style.backgroundRepeat="no-repeat";
+    document.body.style.backgroundSize= "cover";
+    lightsAreOn=true;
+  } else {
+    document.getElementById("imgClick2").style.display='none';
+    document.getElementById("imgClick1").style.display='block';
+    document.body.style.background='black';
+    lightsAreOn=false;
+  }
+}
 function preload() {
   img = loadImage('imageMonster.png');
   img1=loadImage('firstroom.png');
@@ -57,6 +73,9 @@ function draw() {
     fill('235, 19, 12')
     text('Now you have the key',850,560)
   }
+  if(lightsAreOn == false){
+    bgd()
+  }
   //checkInner();
   if (game==true){
     player.update();
@@ -67,11 +86,16 @@ function draw() {
     // }
   }
   //player disappear when game over
+  
 }
-function myFunction(){
-  document.body.style.background="white";
+function bgd(){
+  fill(0);
+  rect(0,0,width,height);
+}
+// function myFunction(){
+//   document.body.style.background="white";
     
-}
+// }
 // function checkInner(){
 //   if (player.x<0 || player.x>1100 || player.y<0 || player.y>600){
 //     inner=false;
@@ -94,18 +118,16 @@ class Player{
     this.l2=30
   }
   update(){
-    //need to add the function that the player cannot move out of the canvas here
-    if (key=='d' && keyIsPressed==true && this.x<1100){
-      this.x+=10;
-    }else if (key=='a' && keyIsPressed==true && this.x>0){        
-      this.x-=10;
-    }else if (key=='w' && keyIsPressed==true && this.y>0){
-      this.y-=10;
-    }else if (key=='s' && keyIsPressed==true && this.y<600){        
-      this.y+=10;
+    //make it one move by one click
+    if (key=='d' && keyIsPressed==true && this.x<1082){
+      this.x+=8;
+    }else if (key=='a' && keyIsPressed==true && this.x>15){        
+      this.x-=8;
+    }else if (key=='w' && keyIsPressed==true && this.y>15){
+      this.y-=8;
+    }else if (key=='s' && keyIsPressed==true && this.y<560){        
+      this.y+=8;
     }
-    //stop moving after death
-   
   }
     //make it one move by one click
     

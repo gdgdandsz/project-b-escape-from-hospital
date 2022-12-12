@@ -21,6 +21,9 @@ let tools1;
 let tools2;
 let checkTool9;
 let checkInst;
+let hints=[]
+let lightsAreOn = false;
+
 //reference: https://pngtree.com/freepng/black-stethoscope-medical-tools-medical-medicine_3896969.html
 let start;
 //let t=0
@@ -38,16 +41,20 @@ function myFunction(){
     document.getElementById("imgClick1").style.display='none';
     document.getElementById("imgClick2").style.display='block';
     document.body.style.background="url('firstroom.png')"
-    document.body.style.background="display: no-repeat"
-    bgd();
+    document.body.style.backgroundRepeat="no-repeat";
+    document.body.style.backgroundSize= "cover";
+
+    //bgd();
+    lightsAreOn=true;
   } else {
     //console.log('125')
     document.getElementById("imgClick2").style.display='none';
     document.getElementById("imgClick1").style.display='block';
     //document.body.style.background='black';
     document.body.style.background='black';
-    document.body.style.background='display: none;position:absolute;top:0px;left:0px;width:100%;height:100%;z-index:100';
+    // document.body.style.background='display: none;position:absolute;top:0px;left:0px;width:100%;height:100%;z-index:100';
     //document.getElementsById('p5canvas').style='z-index:101';
+    lightsAreOn=false
   }
   // document.body.removeChild(img)
 
@@ -94,8 +101,8 @@ function setup() {
 function draw() {
   image(img,0,0)
   background(66, 3, 5, 100);
-
-  image(tools2,500,300)
+  
+  // image(tools2,500,300)
   if (checkTool9==true){
     fill(255);
     rectMode(CORNER);
@@ -109,34 +116,40 @@ function draw() {
   // rect(1050,400,50,200);
   // rect(1057,407,43,193);
   fill(255)
-  tool1.display();
-  tool1.update()
-  tool1.checkDist();
-  tool2.display();
-  tool2.update()
-  tool2.checkDist();
-  tool3.display();
-  tool3.update()
-  tool3.checkDist();
-  tool4.display();
-  tool4.update()
-  tool4.checkDist();
-  tool5.display();
-  tool5.update()
-  tool5.checkDist();
-  tool6.display();
-  tool6.update()
-  tool6.checkDist();
-  tool7.display();
-  tool7.update()
-  tool7.checkDist();
-  tool8.display();
-  tool8.update()
-  tool8.checkDist();
-  tool9.display();
-  tool9.update()
-  tool9.checkDist();
+  if(lightsAreOn == false){
+    bgd()
+  }else{
+    tool1.display();
+    tool1.update()
+    tool1.checkDist();
+    tool2.display();
+    tool2.update()
+    tool2.checkDist();
+    tool3.display();
+    tool3.update()
+    tool3.checkDist();
+    tool4.display();
+    tool4.update()
+    tool4.checkDist();
+    tool5.display();
+    tool5.update()
+    tool5.checkDist();
+    tool6.display();
+    tool6.update()
+    tool6.checkDist();
+    tool7.display();
+    tool7.update()
+    tool7.checkDist();
+    tool8.display();
+    tool8.update()
+    tool8.checkDist();
+    tool9.display();
+    tool9.update()
+    tool9.checkDist();
+    
+  }
   
+
   //hint();
   player.update();
   player.display();
@@ -216,7 +229,7 @@ class Tool2{
   constructor(x,y){
     this.x=x;
     this.y=y;
-    this.c=0
+    this.c=0;
   }
   display(){
     image(tools1, this.x, this.y,80,60);
@@ -386,14 +399,14 @@ class Player{
   }
   update(){
     //make it one move by one click
-    if (key=='d' && keyIsPressed==true && this.x<1100){
-      this.x+=10;
-    }else if (key=='a' && keyIsPressed==true && this.x>0){        
-      this.x-=10;
-    }else if (key=='w' && keyIsPressed==true && this.y>0){
-      this.y-=10;
-    }else if (key=='s' && keyIsPressed==true && this.y<600){        
-      this.y+=10;
+    if (key=='d' && keyIsPressed==true && this.x<1082){
+      this.x+=8;
+    }else if (key=='a' && keyIsPressed==true && this.x>15){        
+      this.x-=8;
+    }else if (key=='w' && keyIsPressed==true && this.y>15){
+      this.y-=8;
+    }else if (key=='s' && keyIsPressed==true && this.y<560){        
+      this.y+=8;
     }
   }
   move(){

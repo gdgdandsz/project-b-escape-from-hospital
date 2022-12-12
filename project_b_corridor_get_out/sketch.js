@@ -11,6 +11,7 @@ let lightImage;
 let game;
 let monster=[];
 let checkWin;
+let lightsAreOn = false;
 //let judge;
 function preload() {
   img = loadImage('imageMonster.png');
@@ -18,6 +19,21 @@ function preload() {
   soundMonster=loadSound('soundMonster.mp4');
   cableconnect=loadImage('../cable1.png');
   cabledisconnect=loadImage('../cable0.png');
+}
+function myFunction(){
+  if (document.getElementById("imgClick2").style.display=='none'){
+    document.getElementById("imgClick1").style.display='none';
+    document.getElementById("imgClick2").style.display='block';
+    document.body.style.background="url('firstroom.png')"
+    document.body.style.backgroundRepeat="no-repeat";
+    document.body.style.backgroundSize= "cover";
+    lightsAreOn=true;
+  } else {
+    document.getElementById("imgClick2").style.display='none';
+    document.getElementById("imgClick1").style.display='block';
+    document.body.style.background='black';
+    lightsAreOn=false
+  }
 }
 function setup() {
   let canvas=createCanvas(1100, 600);
@@ -94,8 +110,14 @@ function draw() {
     fill(145, 12, 4)
     text('Escape Successfully',150,300)
   }
+  if(lightsAreOn == false){
+    bgd()
+  }
 }
-
+function bgd(){
+  fill(0);
+  rect(0,0,width,height);
+}
 function soundmonster(){
   soundMonster.play();
   if (dist(player.x,player.y,monster.x,monster.y)<600){
@@ -153,14 +175,14 @@ class Player{
   }
   update(){
     //make it one move by one click
-    if (key=='d' && keyIsPressed==true && this.x<1100){
-      this.x+=10;
-    }else if (key=='a' && keyIsPressed==true && this.x>0){        
-      this.x-=10;
-    }else if (key=='w' && keyIsPressed==true && this.y>0){
-      this.y-=10;
-    }else if (key=='s' && keyIsPressed==true && this.y<600){        
-      this.y+=10;
+    if (key=='d' && keyIsPressed==true && this.x<1082){
+      this.x+=8;
+    }else if (key=='a' && keyIsPressed==true && this.x>15){        
+      this.x-=8;
+    }else if (key=='w' && keyIsPressed==true && this.y>15){
+      this.y-=8;
+    }else if (key=='s' && keyIsPressed==true && this.y<560){        
+      this.y+=8;
     }
     if (dist(this.x,this.y,monster.x,monster.y)<50){
       textSize(40)
@@ -242,8 +264,8 @@ function mousePressed(){
   // }
 }
 
-function myFunction(){
-  document.body.style.background="white";
+// function myFunction(){
+//   document.body.style.background="white";
 
     
-}
+// }
